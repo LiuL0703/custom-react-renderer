@@ -13,9 +13,21 @@ const ReactReconcilerInst = ReactReconciler({
   ) => {
     console.log(type, props)
     let el = document.createElement(type);
-    if(props.className) el.className = props.className;
-    if(props.src) el.src = props.src;
+    // if(props.className) el.className = props.className;
+    // if(props.src) el.src = props.src;
     // ...
+
+    Object.keys(props).forEach(propName =>{
+      const propValue = props[propName];
+
+      if(propName === 'className'){
+        el.className = propValue;
+      }else if(propName === 'onClick'){
+        el.addEventListener('click',propValue);
+      }else{
+        el.setAttribute(propName, propValue);
+      }
+    })
 
     return el;
   },

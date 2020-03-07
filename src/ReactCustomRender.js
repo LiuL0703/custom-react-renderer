@@ -11,7 +11,7 @@ const ReactReconcilerInst = ReactReconciler({
     hostContext,
     internalInstanceHandle,
   ) => {
-    console.log(type, props)
+    // console.log(type, props)
     let el = document.createElement(type);
     // if(props.className) el.className = props.className;
     // if(props.src) el.src = props.src;
@@ -24,6 +24,15 @@ const ReactReconcilerInst = ReactReconciler({
         el.className = propValue;
       }else if(propName === 'onClick'){
         el.addEventListener('click',propValue);
+      }else if(propName === 'bgColor'){
+        el.style.backgroundColor = propValue;
+      }else if(propName === 'style'){
+        // 
+      }else if(propName === 'children'){
+        console.log('propValue',propValue,'propName',propName)
+        if(typeof propValue === 'string' || propValue === 'number'){
+          el.textContent = propValue;
+        }
       }else{
         el.setAttribute(propName, propValue);
       }
@@ -69,7 +78,18 @@ const ReactReconcilerInst = ReactReconciler({
     newProps,
     rootContainerInstance,
     hostContext,
-  )=>{},
+  )=>{
+    let payload = {};
+    console.log({instance},{type},{oldProps},{newProps})
+    if(typeof oldProps.children === 'string' || typeof oldProps.children === 'number'){
+      payload.text = newProps.children;
+    }
+    // todo 
+    if(oldProps.bgColor !== newProps.bgColor){
+      payload.newBgColor =  newProps.bgColor;
+    }
+    return payload;
+  },
 
   commitUpdate: (
     instance,
@@ -78,7 +98,29 @@ const ReactReconcilerInst = ReactReconciler({
     oldProps,
     newProps,
     finishedWork,
-  ) => {},
+  ) => {
+    if(updatePayload.newBgColor){
+      instance.style.backgroundColor = updatePayload.newBgColor;
+    }
+
+    // todo
+    if(updatePayload.text){
+      instance.textContent = updatePayload.text;
+    }
+
+    return instance;
+  },
+
+  commitTextUpdate:(
+    textInstance,
+    oldText,
+    newText,
+  )=>{
+    console.log('================================')
+    console.log({textInstance},{oldText},{newText})
+    console.log('================================')
+    textInstance.text = newText;
+  },
 
   removeChild:(
     parentInstance,
@@ -109,8 +151,6 @@ const ReactReconcilerInst = ReactReconciler({
     container.insertBefore(child,beforeChild)
   },
 
-  // commitTextUpdate:()=>{},
-
   appendAllChildren: ()=>{},
   prepareForCommit: ()=>{},
   finalizeInitialChildren: ()=>{},
@@ -118,7 +158,12 @@ const ReactReconcilerInst = ReactReconciler({
   getPublicInstance:()=>{},
   getRootHostContext:() => {},
   resetAfterCommit: ()=>{},
-  shouldSetTextContent: ()=>{},
+  shouldSetTextContent: (
+    type,
+    props,
+  )=>{
+    // return typeof props.children === 'string' || typeof props.children === 'number';
+  },
 
 });
 

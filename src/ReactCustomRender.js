@@ -1,0 +1,89 @@
+import ReactReconciler from 'react-reconciler';
+
+
+const ReactReconcilerInst = ReactReconciler({
+  supportsMutation: true,
+
+  createInstance: (
+    type, 
+    props,
+    rootContainerInstance,
+    hostContext,
+    internalInstanceHandle,
+  ) => {
+    // console.log(type, props)
+    // let el = document.createElement(type);
+    // if(props.className) el.className = props.className;
+    // if(props.src) el.src = props.src;
+    // // ...
+
+    // return el;
+  },
+  
+  createTextInstance: (
+    text,
+    rootContainerInstance,
+    hostContext,
+    internalInstanceHandle,
+  ) => {},
+
+  appendChildToContainer:(
+    container,
+    child,
+  ) => {
+
+  },
+
+  appendChild:(
+    parent,
+    child,
+  ) => {},
+
+  appendInitialChild: (
+    parent,
+    child,
+  ) => {},
+
+  prepareUpdate: (
+    instance,
+    type,
+    oldProps,
+    newProps,
+    rootContainerInstance,
+    hostContext,
+  )=>{},
+
+  commitUpdate: (
+    instance,
+    updatePayload,
+    type,
+    oldProps,
+    newProps,
+    finishedWork,
+  ) => {},
+
+
+  appendAllChildren: ()=>{},
+  prepareForCommit: ()=>{},
+  finalizeInitialChildren: ()=>{},
+  getChildHostContext: ()=>{},
+  getPublicInstance:()=>{},
+  getRootHostContext:() => {},
+  resetAfterCommit: ()=>{},
+  shouldSetTextContent: ()=>{},
+
+});
+
+
+export default {
+  render:(reactElement,container) => {
+    let root = container._reactRootContainer;
+    if(!root){
+      const isConcurrent = true;
+      root = ReactReconcilerInst.createContainer(container,isConcurrent)
+    }
+
+    return ReactReconcilerInst.updateContainer(reactElement,root)
+  },
+}
+

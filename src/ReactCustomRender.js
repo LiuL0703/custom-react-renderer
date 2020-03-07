@@ -11,13 +11,13 @@ const ReactReconcilerInst = ReactReconciler({
     hostContext,
     internalInstanceHandle,
   ) => {
-    // console.log(type, props)
-    // let el = document.createElement(type);
-    // if(props.className) el.className = props.className;
-    // if(props.src) el.src = props.src;
-    // // ...
+    console.log(type, props)
+    let el = document.createElement(type);
+    if(props.className) el.className = props.className;
+    if(props.src) el.src = props.src;
+    // ...
 
-    // return el;
+    return el;
   },
   
   createTextInstance: (
@@ -25,24 +25,30 @@ const ReactReconcilerInst = ReactReconciler({
     rootContainerInstance,
     hostContext,
     internalInstanceHandle,
-  ) => {},
+  ) => {
+    return document.createTextNode(text);
+  },
 
   appendChildToContainer:(
     container,
     child,
   ) => {
-
+    container.appendChild(child)
   },
 
   appendChild:(
     parent,
     child,
-  ) => {},
+  ) => {
+    parent.appendChild(child)
+  },
 
   appendInitialChild: (
     parent,
     child,
-  ) => {},
+  ) => {
+    parent.appendChild(child)
+  },
 
   prepareUpdate: (
     instance,

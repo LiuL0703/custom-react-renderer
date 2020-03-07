@@ -4,10 +4,17 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [showLogo, setShowLogo] = useState(true);
   return (
-    <div className="App">
+    <div 
+      className="App" 
+      onClick={()=> {
+        console.log('----')
+        setShowLogo(show => !show)
+      }}
+    >
       <header className="App-header" style={{minHeight: 300}}>
-        <img src={logo} className="App-logo" alt="logo" />
+        {showLogo && <img src={logo} className="App-logo" alt="logo" />}
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

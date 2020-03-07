@@ -80,6 +80,36 @@ const ReactReconcilerInst = ReactReconciler({
     finishedWork,
   ) => {},
 
+  removeChild:(
+    parentInstance,
+    child,
+  )=>{
+    parentInstance.removeChild(child);
+  },
+
+  removeChildFromContainer:(
+    container,
+    child,
+  )=>{
+    container.removeChild(child);
+  },
+
+  insertBefore:(
+    parentInstance,
+    child,
+    beforeChild,
+  )=>{
+    parentInstance.insertBefore(child,beforeChild)
+  },
+  insertInContainerBefore:(
+    container,
+    child,
+    beforeChild,
+  ) => {
+    container.insertBefore(child,beforeChild)
+  },
+
+  // commitTextUpdate:()=>{},
 
   appendAllChildren: ()=>{},
   prepareForCommit: ()=>{},

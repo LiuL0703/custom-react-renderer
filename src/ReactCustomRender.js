@@ -28,6 +28,11 @@ const ReactReconcilerInst = ReactReconciler({
         el.style.backgroundColor = propValue;
       }else if(propName === 'style'){
         // 
+        // const style = el.style
+        // Object.keys(propValue).forEach(styleName => {
+        //   let styleValue = propValue[styleName]
+        //   style.setProperty(styleName, styleValue)
+        // })
       }else if(propName === 'children'){
         console.log('propValue',propValue,'propName',propName)
         if(typeof propValue === 'string' || propValue === 'number'){

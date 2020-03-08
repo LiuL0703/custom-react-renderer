@@ -28,7 +28,7 @@ function App() {
           setShowLogo(show => !show)
         }}
       >
-        <header className="App-header" style={{minHeight: 300}}>
+        <header className="App-header">
           {showLogo && <img src={logo} className="App-logo" alt="logo" />}
           <p bgColor={color}>
             Edit <code>src/App.js</code> and save to reload.
@@ -43,10 +43,10 @@ function App() {
           </a>
         </header>
       </div>
-      <div style={{height:300, marginTop: 50, fontSize: 25 }}>
-        <button style={{width: 80, height: 50, borderRadius: 10, marginRight: 30, outline: 'none',fontSize: 25}} onClick={()=> setCount(count+1)}>+</button>
+      <div className="Count">
+        <button className="increment" onClick={()=> setCount(count+1)}>+</button>
         <div>{count}</div>
-        <button style={{width: 80, height: 50, borderRadius: 10, marginLeft: 30, outline: 'none', fontSize: 25}} onClick={()=> setCount(count-1)}>-</button>
+        <button className="decrement" onClick={()=> setCount(count-1)}>-</button>
       </div>
     </>
   );
